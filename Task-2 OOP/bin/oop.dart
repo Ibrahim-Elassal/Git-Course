@@ -2,39 +2,37 @@ void main() {
   Employee e1 = Employee(
     name: 'Mohamed',
     salary: 8000,
-    section: 'a',
+    section: 'A',
     age: 20,
-    phone: 01143253753,
+    phone: 01164576547,
     isAttend: false,
   );
   Employee e2 = Employee(
     name: 'Ahmed',
-    salary: 2548,
-    section: 'b',
-    age: 35,
-    phone: 01143253451,
+    salary: 12000,
+    section: 'B',
+    age: 30,
+    phone: 01076567688,
     isAttend: true,
   );
   Employee e3 = Employee(
-    name: 'Morgan',
-    salary: 3652,
-    section: 'a',
-    age: 24,
-    phone: 01043921753,
+    name: 'Ibrahim',
+    salary: 20000,
+    section: 'V',
+    age: 33,
+    phone: 01267567677,
     isAttend: false,
   );
   List<Employee> emp = [e1, e2, e3];
-
   Manager manager = Manager(
-    name: 'manal',
-    age: 42,
+    name: 'Alaa',
+    age: 35,
     phone: 0125629526,
-    salary: 6824,
+    salary: 22000,
     isAttend: false,
-    section: 'a',
+    section: 'D',
     employees: emp,
   );
-
   Task goTask = Task(title: 'go', isDelivered: false);
   manager.addTask(emp[0], Task(title: 'play', isDelivered: false));
   manager.addTask(emp[0], Task(title: 'eat', isDelivered: true));
@@ -42,27 +40,24 @@ void main() {
   manager.addTask(emp[1], Task(title: 'watch', isDelivered: true));
   manager.addTask(emp[2], Task(title: 'running', isDelivered: true));
 
-
-  manager.showAllEmployee(emp);
+  manager.numberEmployee(emp);
   print("______");
+  manager.listEmployee(emp);
 
-  for (int i = 0; i < emp.length; i++) {
-    emp[i].printEmployee();
-  }
+  manager.showEmployees(emp);
+
+  print("______________");
   print("All Tasks is :");
   e1.allTasks();
   e2.allTasks();
   e3.allTasks();
-
+  print("______________");
   print("Tasks:");
   e1.showTasks();
   e2.showTasks();
   e3.showTasks();
-
-
 }
 
-// parent class person
 class Person {
   late String? name;
   late int? age;
@@ -81,7 +76,6 @@ class Person {
   });
 }
 
-// sub class Manager
 class Manager extends Person {
   late List<Employee>? employees;
 
@@ -106,16 +100,23 @@ class Manager extends Person {
     e.tasks.add(task);
   }
 
-  void showAllEmployee(List<Employee> emp) {
-    print(employees?.length);
-    print(employees);
+  void numberEmployee(List<Employee> emp) {
+    print("Number of Employees is : ${employees?.length} ");
+  }
+
+  void listEmployee(List<Employee> emp){
     for (int i = 0; i < emp.length; i++) {
+      emp[i].employeeName();
+    }
+  }
+
+  void showEmployees(List<Employee> emp){
+    for (int i = 0; i < emp.length; i++) {
+      // emp[i].employeeName();
       emp[i].printEmployee();
     }
   }
 }
-
-// task is deliverd or not
 
 class Task {
   String title;
@@ -131,7 +132,6 @@ class Task {
   }
 }
 
-// sub class employee
 class Employee extends Person {
   List<Task> tasks = [];
 
@@ -152,19 +152,20 @@ class Employee extends Person {
   );
 
   void printEmployee() {
-    print('****');
-
+    print("______");
     print('Name Is :$name');
     print('Age Is :$age');
     print('Phone Is :$phone');
     print('Salary Is :$salary');
     print('Section Is :$section');
     print('IsAttend Is :$isAttend');
-
     print("Tasks Is :");
     allTasks();
   }
+  void employeeName() {
+    print('Name Is :$name');
 
+  }
   void allTasks(){
     for (Task task in tasks) {
       task.isDelivered
@@ -173,8 +174,8 @@ class Employee extends Person {
     }
   }
   void showTasks(){
-    for (var i in  tasks){
-      print(i);
+    for (Task task in  tasks){
+      print(task.title);
     }
   }
 }
